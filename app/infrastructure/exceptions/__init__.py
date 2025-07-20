@@ -11,12 +11,12 @@ from .exceptions import (
     S3ServiceException,
     SlackServiceException,
     GCPServiceException,
-    AMCServiceException
+    AMCServiceException,
 )
 
 __all__ = [
     "DomainException",
-    "InfrastructureException", 
+    "InfrastructureException",
     "PresentationException",
     "TaskNotFoundException",
     "WorkerUnavailableException",
@@ -27,5 +27,5 @@ __all__ = [
     "S3ServiceException",
     "SlackServiceException",
     "GCPServiceException",
-    "AMCServiceException"
+    "AMCServiceException",
 ]
