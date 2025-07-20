@@ -10,11 +10,15 @@ class TestTaskStatus:
         assert TaskStatus.FAILED.value == "failed"
         assert TaskStatus.CANCELLED.value == "cancelled"
         assert TaskStatus.RETRY.value == "retry"
-    
+
     def test_task_status_enum_members(self):
         expected_members = {
-            "PENDING", "IN_PROGRESS", "COMPLETED", 
-            "FAILED", "CANCELLED", "RETRY"
+            "PENDING",
+            "IN_PROGRESS",
+            "COMPLETED",
+            "FAILED",
+            "CANCELLED",
+            "RETRY",
         }
         actual_members = {member.name for member in TaskStatus}
         assert actual_members == expected_members
@@ -26,7 +30,7 @@ class TestTaskPriority:
         assert TaskPriority.MEDIUM.value == "medium"
         assert TaskPriority.HIGH.value == "high"
         assert TaskPriority.CRITICAL.value == "critical"
-    
+
     def test_task_priority_enum_members(self):
         expected_members = {"LOW", "MEDIUM", "HIGH", "CRITICAL"}
         actual_members = {member.name for member in TaskPriority}
@@ -39,7 +43,7 @@ class TestWorkerStatus:
         assert WorkerStatus.BUSY.value == "busy"
         assert WorkerStatus.OFFLINE.value == "offline"
         assert WorkerStatus.MAINTENANCE.value == "maintenance"
-    
+
     def test_worker_status_enum_members(self):
         expected_members = {"IDLE", "BUSY", "OFFLINE", "MAINTENANCE"}
         actual_members = {member.name for member in WorkerStatus}

@@ -5,7 +5,11 @@ from unittest.mock import AsyncMock, MagicMock
 
 from app.domain.entities import Task, Worker, TaskResult, TaskId, WorkerId
 from app.domain.enums import TaskStatus, TaskPriority, WorkerStatus
-from app.domain.services.repository_interfaces import TaskRepository, WorkerRepository, TaskResultRepository
+from app.domain.services.repository_interfaces import (
+    TaskRepository,
+    WorkerRepository,
+    TaskResultRepository,
+)
 from app.domain.services.worker_dispatcher_impl import WorkerDispatcherImpl
 from app.domain.services.worker_management_impl import WorkerManagementImpl
 
@@ -14,19 +18,14 @@ from app.domain.services.worker_management_impl import WorkerManagementImpl
 def sample_task():
     """Create a sample task for testing"""
     return Task(
-        name="Test Task",
-        priority=TaskPriority.MEDIUM,
-        payload={"test": "data"}
+        name="Test Task", priority=TaskPriority.MEDIUM, payload={"test": "data"}
     )
 
 
 @pytest.fixture
 def sample_worker():
     """Create a sample worker for testing"""
-    return Worker(
-        name="Test Worker",
-        capabilities=["general", "data-processing"]
-    )
+    return Worker(name="Test Worker", capabilities=["general", "data-processing"])
 
 
 @pytest.fixture
@@ -36,7 +35,7 @@ def sample_task_result(sample_task, sample_worker):
         task_id=sample_task.id,
         worker_id=sample_worker.id,
         status=TaskStatus.COMPLETED,
-        result_data={"result": "success"}
+        result_data={"result": "success"},
     )
 
 
@@ -81,13 +80,18 @@ def mock_worker_management(mock_worker_repository):
 
 
 @pytest.fixture
-def mock_dispatcher(mock_task_repository, mock_worker_repository, mock_result_repository, mock_worker_management):
+def mock_dispatcher(
+    mock_task_repository,
+    mock_worker_repository,
+    mock_result_repository,
+    mock_worker_management,
+):
     """Create a mock dispatcher service"""
     return WorkerDispatcherImpl(
         mock_task_repository,
         mock_worker_repository,
         mock_result_repository,
-        mock_worker_management
+        mock_worker_management,
     )
 
 
@@ -107,6 +111,7 @@ def anyio_backend():
 
 class MockAsyncSession:
     """Mock async database session"""
+
     def __init__(self):
         self.add = MagicMock()
         self.delete = MagicMock()
@@ -115,10 +120,10 @@ class MockAsyncSession:
         self.execute = AsyncMock()
         self.get = AsyncMock()
         self.scalars = MagicMock()
-    
+
     async def __aenter__(self):
         return self
-    
+
     async def __aexit__(self, exc_type, exc_val, exc_tb):
         pass
 
